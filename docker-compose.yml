@@ -12,8 +12,3 @@ services:
       - MINIO_ROOT_USER: hoangth33
       - MINIO_ROOT_PASSWORD: Huyhoang6669@
     command: server --console-address ":9001" /data
-    networks:
-      - hoangth33
-networks:
-  hoangth33:
-    driver: bridge
