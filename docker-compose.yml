@@ -1,17 +1,27 @@
-version: '3'
-services: 
-  minio:
-    image: quay.io/minio/minio
-    container_name: minio
-    ports:
+version: '3.7'
+
+# Settings and configurations that are common for all contairners
+x-minio-common: &minio-common
+  image: quay.io/minio/minio:latest
+  command: server --console-address ":9001" /data
+  ports:
       - "9000:9000"
       - "9001:9001"
+  healthcheck:
+    test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+    interval: 30s
+    timeout: 20s
+    retries: 3
+
+services: 
+  minio:
+    <<: *minio-common
+    hostname: minio
     volumes: 
       - ./storage:/data
     environment:
       - MINIO_ROOT_USER: hoangth33
       - MINIO_ROOT_PASSWORD: Huyhoang6669@
-    command: server --console-address ":9001" /data
     networks:
       - hoangth33
 
