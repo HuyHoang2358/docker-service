@@ -1,4 +1,4 @@
-version: '3'
+version: '3.7'
 
 # Settings and configurations that are common for all contairners
 x-minio-common: &minio-common
@@ -26,7 +26,7 @@ x-postgis-common: &postgis-common
   ports:
     - ${POSTGIS_PUBLIC_PORT}:5432
   healthcheck:
-    test: "PGPASSWORD=${POSTGRES_PASS} pg_isready -h 127.0.0.1 -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
+    test: "PGPASSWORD=${POSTGRES_PASSWORD} pg_isready -h 127.0.0.1 -U ${POSTGRES_USER} -d ${POSTGRES_DB}"
     interval: 1m30s
     timeout: 10s
     retries: 3
@@ -47,9 +47,6 @@ x-geoserver-common: &geoserver-common
     - ${GEOSERVER_PORT}:8080
   restart: on-failure
   environment:
-    - GEOSERVER_DATA_DIR=${GEOSERVER_DATA_DIR}
-    - GEOWEBCACHE_CACHE_DIR=${GEOWEBCACHE_CACHE_DIR}
-    - FOOTPRINTS_DATA_DIR=${FOOTPRINTS_DATA_DIR}
     - GEOSERVER_ADMIN_PASSWORD=${GEOSERVER_ADMIN_PASSWORD}
     - GEOSERVER_ADMIN_USER=${GEOSERVER_ADMIN_USER}
     - INITIAL_MEMORY=${INITIAL_MEMORY}
