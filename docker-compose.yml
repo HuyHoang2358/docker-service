@@ -42,7 +42,6 @@ x-pgadmin-common: &pgadmin-common
     - ${PGADMIN_PUBLIC_PORT}:8888
 
 x-geoserver-common: &geoserver-common
-geoserver:
   image: kartoza/geoserver:${GS_VERSION}
   ports:
     - ${GEOSERVER_PORT}:8080
@@ -65,8 +64,6 @@ geoserver:
     timeout: 10s
     retries: 3
     start_period: 1m
-
-
 # All services
 services: 
   minio:
@@ -109,12 +106,6 @@ services:
         condition: service_healthy
     networks:
       - hoangth33
-
-# Volumes
-volumes:
-  postgis-data:
-  dbbackups:
-
 networks:
   hoangth33:
     driver: bridge
