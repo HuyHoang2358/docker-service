@@ -86,21 +86,23 @@ services:
       - ./dbbackups:/backups
     networks:
       - hoangth33
-  pgadmin:
-    <<: *pgadmin-common
-    hostname: pgadmin
-    container_name: pgadmin
-    depends_on:
-      db:
-        condition: service_healthy
-    networks:
-      - hoangth33
+ 
   geoserver:
     <<: *geoserver-common
     hostname: geoserver
     container_name: geoserver
     volumes:
       - ./geoserver:/opt/geoserver/data_dir
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - hoangth33
+
+  pgadmin:
+    <<: *pgadmin-common
+    hostname: pgadmin
+    container_name: pgadmin
     depends_on:
       db:
         condition: service_healthy
