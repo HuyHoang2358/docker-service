@@ -38,6 +38,7 @@ x-pgadmin-common: &pgadmin-common
     - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
     - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
     - PGADMIN_CONFIG_SERVER_MODE=False
+    - PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED=False
   volumes:
     - ./pgadmin:/var/lib/pgadmin
   ports:
