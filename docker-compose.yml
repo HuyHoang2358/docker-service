@@ -41,7 +41,7 @@ x-pgadmin-common: &pgadmin-common
   volumes:
     - ./pgadmin:/var/lib/pgadmin
   ports:
-    - ${PGADMIN_PUBLIC_PORT}:80
+    - ${PGADMIN_PUBLIC_PORT:-5050}:80
 
 x-geoserver-common: &geoserver-common
   image: kartoza/geoserver:${GS_VERSION}
