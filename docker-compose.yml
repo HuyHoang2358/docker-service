@@ -32,11 +32,12 @@ x-postgis-common: &postgis-common
     start_period: 1m
     
 x-pgadmin-common: &pgadmin-common
-  image: dpage/pgadmin4:latest
-  restart: always
+  image: dpage/pgadmin4
+  restart: unless-stopped
   environment:
     - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
     - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+    - PGADMIN_CONFIG_SERVER_MODE=False
   volumes:
     - ./pgadmin:/var/lib/pgadmin
   ports:
@@ -85,7 +86,6 @@ services:
       - ./dbbackups:/backups
     networks:
       - hoangth33
- 
   geoserver:
     <<: *geoserver-common
     hostname: geoserver
