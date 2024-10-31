@@ -102,9 +102,6 @@ services:
     <<: *pgadmin-common
     hostname: pgadmin
     container_name: pgadmin
-    depends_on:
-      db:
-        condition: service_healthy
     networks:
       - hoangth33
 networks:
